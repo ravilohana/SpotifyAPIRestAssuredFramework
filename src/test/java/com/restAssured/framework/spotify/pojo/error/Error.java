@@ -2,7 +2,10 @@
 package com.restAssured.framework.spotify.pojo.error;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 
@@ -27,14 +30,5 @@ public class Error {
         this.error = error;
     }
 
-    @JsonProperty("error")
-    public InnerError getError() {
-        return error;
-    }
-
-    @JsonProperty("error")
-    public void setError(InnerError error) {
-        this.error = error;
-    }
 
 }

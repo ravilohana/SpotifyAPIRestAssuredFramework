@@ -51,7 +51,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
         SpotifyPlayList req_spotifyPlayList = new SpotifyPlayList();
         req_spotifyPlayList.setName("Spotify PlayList POJO 1");
         req_spotifyPlayList.setDescription("Spotify playlist created by rest assured using POJO");
-        req_spotifyPlayList.setPublic(false);
+        req_spotifyPlayList.set_public(false);
 
         // De-serialization
         SpotifyPlayList res_spotifyPlayList = given()
@@ -72,7 +72,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
 
         assertThat(req_spotifyPlayList.getName(), equalTo(res_spotifyPlayList.getName()));
         assertThat(req_spotifyPlayList.getDescription(), equalTo(res_spotifyPlayList.getDescription()));
-        assertThat(req_spotifyPlayList.getPublic(), equalTo(res_spotifyPlayList.getPublic()));
+        assertThat(req_spotifyPlayList.get_public(), equalTo(res_spotifyPlayList.get_public()));
     }
 
 
@@ -82,7 +82,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
         SpotifyPlayList req_spotifyPlayList = new SpotifyPlayList();
         req_spotifyPlayList.setName("Rest Assured Spotify PL 0002");
         req_spotifyPlayList.setDescription("Spotify playlist created by Spotify web api using Rest Assured");
-        req_spotifyPlayList.setPublic(false);
+        req_spotifyPlayList.set_public(false);
 
         // De-serialization
         SpotifyPlayList res_spotifyPlayList = given()
@@ -100,7 +100,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
                 .as(SpotifyPlayList.class);
         assertThat(req_spotifyPlayList.getName(), equalTo(res_spotifyPlayList.getName()));
         assertThat(req_spotifyPlayList.getDescription(), equalTo(res_spotifyPlayList.getDescription()));
-        assertThat(req_spotifyPlayList.getPublic(), equalTo(res_spotifyPlayList.getPublic()));
+        assertThat(req_spotifyPlayList.get_public(), equalTo(res_spotifyPlayList.get_public()));
 
     }
 
@@ -111,7 +111,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
         SpotifyPlayList req_spotifyPlayList = new SpotifyPlayList();
         req_spotifyPlayList.setName("Rest Assured Spotify PL 0002-updated");
         req_spotifyPlayList.setDescription("Spotify playlist created by Spotify web api using Rest Assured-updated");
-        req_spotifyPlayList.setPublic(false);
+        req_spotifyPlayList.set_public(false);
 
 // De-serialization
         SpotifyPlayList res_spotifyPlayList = given()
@@ -131,7 +131,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
                 .as(SpotifyPlayList.class);
         assertThat(req_spotifyPlayList.getName(), equalTo(res_spotifyPlayList.getName()));
         assertThat(req_spotifyPlayList.getDescription(), equalTo(res_spotifyPlayList.getDescription()));
-        assertThat(req_spotifyPlayList.getPublic(), equalTo(res_spotifyPlayList.getPublic()));
+        assertThat(req_spotifyPlayList.get_public(), equalTo(res_spotifyPlayList.get_public()));
 
     }
 
@@ -144,7 +144,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
         SpotifyPlayList req_spotifyPlayList = new SpotifyPlayList();
         req_spotifyPlayList.setName("");
         req_spotifyPlayList.setDescription("Spotify playlist created by Spotify web api using Rest Assured-updated");
-        req_spotifyPlayList.setPublic(false);
+        req_spotifyPlayList.set_public(false);
 
 
         // De-serialization
@@ -174,7 +174,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
         SpotifyPlayList req_spotifyPlayList = new SpotifyPlayList();
         req_spotifyPlayList.setName("");
         req_spotifyPlayList.setDescription("Spotify playlist created by Spotify web api using Rest Assured-updated");
-        req_spotifyPlayList.setPublic(false);
+        req_spotifyPlayList.set_public(false);
 
         // De-serialization
         Error res_error = given()

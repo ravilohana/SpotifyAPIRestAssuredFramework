@@ -112,10 +112,12 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
     public SpotifyPlayList spotifyPlayListBuilder(String playlist_name, String playlist_description, boolean isPublic) {
 
-        return new SpotifyPlayList()
-                .setName(playlist_name)
-                .setDescription(playlist_description)
-                .setPublic(isPublic);
+
+        SpotifyPlayList spotifyPlayList = new SpotifyPlayList();
+        spotifyPlayList.setName(playlist_name);
+        spotifyPlayList.setDescription(playlist_description);
+        spotifyPlayList.set_public(isPublic);
+        return spotifyPlayList;
 
     }
 
@@ -123,7 +125,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
         assertThat(req_spotifyPlayList.getName(), equalTo(res_spotifyPlayList.getName()));
         assertThat(req_spotifyPlayList.getDescription(), equalTo(res_spotifyPlayList.getDescription()));
-        assertThat(req_spotifyPlayList.getPublic(), equalTo(res_spotifyPlayList.getPublic()));
+        assertThat(req_spotifyPlayList.get_public(), equalTo(res_spotifyPlayList.get_public()));
 
     }
 
