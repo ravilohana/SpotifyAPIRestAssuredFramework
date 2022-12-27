@@ -112,12 +112,12 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
     public SpotifyPlayList spotifyPlayListBuilder(String playlist_name, String playlist_description, boolean isPublic) {
 
-
-        SpotifyPlayList spotifyPlayList = new SpotifyPlayList();
-        spotifyPlayList.setName(playlist_name);
-        spotifyPlayList.setDescription(playlist_description);
-        spotifyPlayList.set_public(isPublic);
-        return spotifyPlayList;
+        return SpotifyPlayList.builder()
+                .name(playlist_name)
+                .description(playlist_description)
+                ._public(isPublic)
+                .build();
+      
 
     }
 

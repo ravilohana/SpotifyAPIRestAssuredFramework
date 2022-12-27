@@ -1,15 +1,17 @@
 
 package com.restAssured.framework.spotify.pojo.playlist;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
+
+import java.util.List;
 
 
 @Getter @Setter
+@Jacksonized
 //@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SpotifyPlayList {
@@ -93,5 +95,112 @@ public class SpotifyPlayList {
         this.uri = uri;
     }
 
+    public static SpotifyPlayListBuilder builder() {
+        return new SpotifyPlayListBuilder();
+    }
 
+
+    public static class SpotifyPlayListBuilder {
+        private Boolean collaborative;
+        private String description;
+        private ExternalUrls externalUrls;
+        private Followers followers;
+        private String href;
+        private String id;
+        private List<Object> images;
+        private String name;
+        private Owner owner;
+        private Object primaryColor;
+        private Boolean _public;
+        private String snapshotId;
+        private Tracks tracks;
+        private String type;
+        private String uri;
+
+        SpotifyPlayListBuilder() {
+        }
+
+        public SpotifyPlayListBuilder collaborative(Boolean collaborative) {
+            this.collaborative = collaborative;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder externalUrls(ExternalUrls externalUrls) {
+            this.externalUrls = externalUrls;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder followers(Followers followers) {
+            this.followers = followers;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder href(String href) {
+            this.href = href;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder images(List<Object> images) {
+            this.images = images;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder owner(Owner owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder primaryColor(Object primaryColor) {
+            this.primaryColor = primaryColor;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder _public(Boolean _public) {
+            this._public = _public;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder snapshotId(String snapshotId) {
+            this.snapshotId = snapshotId;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder tracks(Tracks tracks) {
+            this.tracks = tracks;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public SpotifyPlayListBuilder uri(String uri) {
+            this.uri = uri;
+            return this;
+        }
+
+        public SpotifyPlayList build() {
+            return new SpotifyPlayList(collaborative, description, externalUrls, followers, href, id, images, name, owner, primaryColor, _public, snapshotId, tracks, type, uri);
+        }
+
+        public String toString() {
+            return "SpotifyPlayList.SpotifyPlayListBuilder(collaborative=" + this.collaborative + ", description=" + this.description + ", externalUrls=" + this.externalUrls + ", followers=" + this.followers + ", href=" + this.href + ", id=" + this.id + ", images=" + this.images + ", name=" + this.name + ", owner=" + this.owner + ", primaryColor=" + this.primaryColor + ", _public=" + this._public + ", snapshotId=" + this.snapshotId + ", tracks=" + this.tracks + ", type=" + this.type + ", uri=" + this.uri + ")";
+        }
+    }
 }
