@@ -1,5 +1,7 @@
 package com.restAssured.framework.spotify.playList_testcases;
 
+import com.restAssured.framework.base.BaseTest;
+import com.restAssured.framework.spotify.api.StatusCode;
 import com.restAssured.framework.spotify.applicationAPI.PlayListAPI;
 import com.restAssured.framework.spotify.pojo.error.Error;
 import com.restAssured.framework.spotify.pojo.playlist.SpotifyPlayList;
@@ -11,12 +13,17 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 
+import static com.restAssured.framework.spotify.utils.JavaFakerUtils.generateDescription;
+import static com.restAssured.framework.spotify.utils.JavaFakerUtils.generateName;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+// Enable Multiple environments
+// Maven command
+// mvn test -DBASE_URI="https://api.spotify.com" -DACCOUNT_BASE_URI="https://accounts.spotify.com"
 @Epic("spotify OAuth 2.0")
 @Feature("Spotify Playlist API")
-public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
+public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern extends BaseTest {
 
     @Story("Create Spotify Playlist")
     @Link("https://example.org")
@@ -29,11 +36,10 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
     @Test(description = "Spotify Create Playlist API - POST Call")
     public void shouldBeAbleToCreateAPlaylist_pojo() {
 
-        SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder("Spotify PlayList POJO 2",
-                "Spotify playlist created by rest assured using POJO 2", false);
+        SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder(generateName(), generateDescription(), false);
 
         Response response = PlayListAPI.post(req_spotifyPlayList);
-        assertStatusCode(response.statusCode(), 201);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_201);
         assertThat(response.contentType(), equalTo("application/json; charset=utf-8"));
 
         // De-serialization
@@ -53,7 +59,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
 
         Response response = PlayListAPI.get(DataLoader.getInstance().getPlaylistID());
-        assertStatusCode(response.statusCode(), 200);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_200);
         assertThat(response.contentType(), equalTo("application/json; charset=utf-8"));
 
         // De-serialization
@@ -69,12 +75,11 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
     public void shouldBeAbleToUpdateAPlaylist_pojo() {
 
 
-        SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder("Rest Assured Spotify PL 0002-updated",
-                "Spotify playlist created by Spotify web api using Rest Assured-updated", false);
+        SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder(generateName(), generateDescription(), false);
 
 
         Response response = PlayListAPI.update(DataLoader.getInstance().getUpdatePlaylistID(), req_spotifyPlayList);
-        assertStatusCode(response.statusCode(), 200);
+        assertStatusCode(response.statusCode(), StatusCode.CODE_200);
 
 
 // De-serialization
@@ -94,11 +99,11 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
 
         Response response = PlayListAPI.post(req_spotifyPlayList);
-        assertStatusCode(response.getStatusCode(), 400);
+        assertStatusCode(response.getStatusCode(), StatusCode.CODE_400);
 
         // De-serialization
 
-        assertError(response.as(Error.class), 400, "Missing required field: name");
+        assertError(response.as(Error.class), StatusCode.CODE_400);
 
     }
 
@@ -108,15 +113,14 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
     public void createPlayWithInvalidAccessToken() {
 
         String invalid_token = "12345";
-        SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder("",
-                "Spotify playlist created by Spotify web api using Rest Assured-updated", false);
+        SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder(generateName(), generateDescription(), false);
 
 
         Response response = PlayListAPI.post(invalid_token, req_spotifyPlayList);
-        assertStatusCode(response.getStatusCode(), 401);
+        assertStatusCode(response.getStatusCode(), StatusCode.CODE_401);
 
         // De-serialization
-        assertError(response.as(Error.class), 401, "Invalid access token");
+        assertError(response.as(Error.class), StatusCode.CODE_401);
     }
 
 
@@ -142,15 +146,15 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
     }
 
     @Step
-    public void assertStatusCode(int actualStatusCode, int expectedStatusCode) {
-        assertThat(actualStatusCode, equalTo(expectedStatusCode));
+    public void assertStatusCode(int actualStatusCode, StatusCode statusCode) {
+        assertThat(actualStatusCode, equalTo(statusCode.code));
     }
 
     @Step
-    public void assertError(Error responseError, int expectedStatusCode, String expectedMsg) {
+    public void assertError(Error responseError, StatusCode statusCode) {
 
-        assertThat(responseError.getError().getStatus(), equalTo(expectedStatusCode));
-        assertThat(responseError.getError().getMessage(), equalTo(expectedMsg));
+        assertThat(responseError.getError().getStatus(), equalTo(statusCode.code));
+        assertThat(responseError.getError().getMessage(), equalTo(statusCode.msg));
 
     }
 

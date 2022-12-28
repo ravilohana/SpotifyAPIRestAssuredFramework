@@ -103,6 +103,12 @@
             <version>2.20.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
 
 
 
@@ -131,6 +137,8 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M7</version>
                     <configuration>
+                        <parallel>methods</parallel>
+                        <threadCount>10</threadCount>
                         <suiteXmlFiles>
                             <suiteXmlFile>C:\Users\lohan\AppData\Local\JetBrains\IdeaIC2022.3\temp-testng-customsuite.xml</suiteXmlFile>
                         </suiteXmlFiles>

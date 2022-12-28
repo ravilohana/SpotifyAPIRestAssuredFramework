@@ -13,10 +13,12 @@ import static com.restAssured.framework.spotify.api.Route_BasePath_Constant.BASE
 public class SpecBuilder {
 
 
+
     public static RequestSpecification getRequestSpecs(){
 
         return new RequestSpecBuilder()
-                .setBaseUri("https://api.spotify.com")
+        //        .setBaseUri("https://api.spotify.com")
+                .setBaseUri(System.getProperty("BASE_URI"))
                 .setBasePath(BASE_PATH)
                 .addFilter(new AllureRestAssured())
                 .log(LogDetail.ALL)
@@ -27,7 +29,8 @@ public class SpecBuilder {
     public static RequestSpecification getAccountRequestSpecs(){
 
         return new RequestSpecBuilder()
-                .setBaseUri("https://accounts.spotify.com")
+        //        .setBaseUri("https://accounts.spotify.com")
+                .setBaseUri(System.getProperty("ACCOUNT_BASE_URI"))
                 .setContentType(ContentType.URLENC)
                 .addFilter(new AllureRestAssured())
                 .log(LogDetail.ALL)
