@@ -6,6 +6,7 @@ import com.restAssured.framework.spotify.pojo.playlist.SpotifyPlayList;
 
 
 import com.restAssured.framework.spotify.utils.DataLoader;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -13,11 +14,19 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic("spotify OAuth 2.0")
+@Feature("Spotify Playlist API")
 public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
+    @Story("Create Spotify Playlist")
+    @Link("https://example.org")
+    @Link(name = "allure", type = "mylink")
+    @Issue("12345")
+    // tms -- test management software
+    @TmsLink("tms/12345")
 
-
-    @Test
+    @Description("Spotify Playlist should be created using POST call")
+    @Test(description = "Spotify Create Playlist API - POST Call")
     public void shouldBeAbleToCreateAPlaylist_pojo() {
 
         SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder("Spotify PlayList POJO 2",
@@ -35,8 +44,8 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
     }
 
-
-    @Test
+    @Description("Spotify Playlist fetch using GET call")
+    @Test(description = "Spotify Playlist - GET API")
     public void shouldBeAbleToGetAPlaylist_pojo() {
 
         SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder("Spotify PlayList POJO 2",
@@ -55,8 +64,8 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
     }
 
-
-    @Test
+    @Description("Spotify Playlist should be updated using PUT call")
+    @Test(description = "Spotify Update playlist - PUT API")
     public void shouldBeAbleToUpdateAPlaylist_pojo() {
 
 
@@ -75,8 +84,9 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
 
     // Negative test cases
-
-    @Test
+    @Story("Create Spotify Playlist")
+    @Description("Spotify Playlist should not be created using POST call as we provide empty value for name field.")
+    @Test (description = "Spotify create playlist with empty name - negative test case")
     public void shouldNotBeAbleToCreateAPlaylist_with_Empty_Name() {
 
         SpotifyPlayList req_spotifyPlayList = spotifyPlayListBuilder("",
@@ -92,8 +102,9 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
     }
 
-
-    @Test
+    @Story("Create Spotify Playlist")
+    @Description("Spotify Playlist should not be created using POST call as token is invalid")
+    @Test(description = "Spotify playlist API with Invalid token - Negative test case")
     public void createPlayWithInvalidAccessToken() {
 
         String invalid_token = "12345";
@@ -109,7 +120,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
     }
 
 
-
+    @Step
     public SpotifyPlayList spotifyPlayListBuilder(String playlist_name, String playlist_description, boolean isPublic) {
 
         return SpotifyPlayList.builder()
@@ -117,10 +128,11 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
                 .description(playlist_description)
                 ._public(isPublic)
                 .build();
-      
+
 
     }
 
+    @Step
     public void assertSpotifyPlaylistEquals(SpotifyPlayList res_spotifyPlayList, SpotifyPlayList req_spotifyPlayList) {
 
         assertThat(req_spotifyPlayList.getName(), equalTo(res_spotifyPlayList.getName()));
@@ -129,10 +141,12 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern {
 
     }
 
+    @Step
     public void assertStatusCode(int actualStatusCode, int expectedStatusCode) {
         assertThat(actualStatusCode, equalTo(expectedStatusCode));
     }
 
+    @Step
     public void assertError(Error responseError, int expectedStatusCode, String expectedMsg) {
 
         assertThat(responseError.getError().getStatus(), equalTo(expectedStatusCode));

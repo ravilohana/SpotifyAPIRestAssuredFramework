@@ -4,6 +4,7 @@ import com.restAssured.framework.spotify.api.SpotifyCommonAPI_HTTP_Methods;
 import com.restAssured.framework.spotify.pojo.playlist.SpotifyPlayList;
 
 import com.restAssured.framework.spotify.utils.ConfigLoader;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 
@@ -14,13 +15,14 @@ import static com.restAssured.framework.spotify.api.TokenManager.getToken;
 
 public class PlayListAPI {
 
+    @Step
     public static Response post(SpotifyPlayList req_spotifyPlayList) {
 
         return SpotifyCommonAPI_HTTP_Methods.post(USERS + "/" + ConfigLoader.getInstance().getUserID() +PLAYLIST, getToken(), req_spotifyPlayList);
 
     }
 
-
+    @Step
     public static Response post(String token, SpotifyPlayList req_spotifyPlayList) {
 
         return SpotifyCommonAPI_HTTP_Methods.post(USERS + "/" + ConfigLoader.getInstance().getUserID() + PLAYLIST, token, req_spotifyPlayList);
@@ -28,6 +30,7 @@ public class PlayListAPI {
     }
 
 
+    @Step
     public static Response get(String playlistID) {
 
         return SpotifyCommonAPI_HTTP_Methods.get(PLAYLIST + "/" + playlistID, getToken());
