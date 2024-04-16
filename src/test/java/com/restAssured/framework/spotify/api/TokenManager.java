@@ -1,15 +1,14 @@
 package com.restAssured.framework.spotify.api;
 
 import com.restAssured.framework.spotify.utils.ConfigLoader;
-import io.restassured.http.ContentType;
+
 import io.restassured.response.Response;
 
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.restAssured.framework.spotify.api.SpecBuilder.getResponseSpecs;
-import static io.restassured.RestAssured.given;
+
 
 public class TokenManager {
 
@@ -48,8 +47,11 @@ public class TokenManager {
         token_formParam.put("grant_type",ConfigLoader.getInstance().getGrantType());
         token_formParam.put("refresh_token",ConfigLoader.getInstance().getRefreshToken());
 
+        System.out.println(token_formParam);
 
         Response response = SpotifyCommonAPI_HTTP_Methods.postAccount(token_formParam);
+
+        System.out.println(response.asPrettyString());
 
 
         if(response.statusCode() != 200){

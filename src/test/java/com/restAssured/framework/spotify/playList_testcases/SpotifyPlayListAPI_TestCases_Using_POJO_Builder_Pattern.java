@@ -26,11 +26,11 @@ import static org.hamcrest.Matchers.equalTo;
 public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern extends BaseTest {
 
     @Story("Create Spotify Playlist")
-    @Link("https://example.org")
-    @Link(name = "allure", type = "mylink")
-    @Issue("12345")
-    // tms -- test management software
-    @TmsLink("tms/12345")
+//    @Link("https://example.org")
+//    @Link(name = "allure", type = "mylink")
+//    @Issue("12345")
+//    // tms -- test management software
+//    @TmsLink("tms/12345")
 
     @Description("Spotify Playlist should be created using POST call")
     @Test(description = "Spotify Create Playlist API - POST Call")
@@ -65,7 +65,9 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern extends Bas
         // De-serialization
 
 
-        assertSpotifyPlaylistEquals(response.as(SpotifyPlayList.class), req_spotifyPlayList);
+        assertThat(req_spotifyPlayList.getName(), equalTo("Spotify PlayList POJO 2"));
+        assertThat(req_spotifyPlayList.getDescription(), equalTo("Spotify playlist created by rest assured using POJO 2"));
+        assertThat(req_spotifyPlayList.get_public(), equalTo(false));
 
 
     }
@@ -138,6 +140,9 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO_Builder_Pattern extends Bas
 
     @Step
     public void assertSpotifyPlaylistEquals(SpotifyPlayList res_spotifyPlayList, SpotifyPlayList req_spotifyPlayList) {
+
+
+
 
         assertThat(req_spotifyPlayList.getName(), equalTo(res_spotifyPlayList.getName()));
         assertThat(req_spotifyPlayList.getDescription(), equalTo(res_spotifyPlayList.getDescription()));

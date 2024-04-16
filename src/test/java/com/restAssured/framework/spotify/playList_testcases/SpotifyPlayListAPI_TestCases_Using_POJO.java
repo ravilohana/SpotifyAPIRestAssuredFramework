@@ -1,5 +1,6 @@
 package com.restAssured.framework.spotify.playList_testcases;
 
+import com.restAssured.framework.spotify.api.TokenManager;
 import com.restAssured.framework.spotify.pojo.error.Error;
 import com.restAssured.framework.spotify.pojo.playlist.SpotifyPlayList;
 import io.restassured.builder.RequestSpecBuilder;
@@ -21,7 +22,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
     ResponseSpecification responseSpecification;
     SpotifyPlayList req_spotifyPlayList;
 
-    String access_token = "BQAsajkA_6AxxwTZMWZPOQaR4obCkytkxY5WC9Ih2Bx6-UmH-FapWjdiHcQonMQor_dngoKtoBuCMJT_NHGGb1yVU0t_QY4OkGvqf1JoQ_HtOkZaRHeYXTEGbWfTtfqjw0uSQGsMOm8NFFOBuR89LEtM1KP-rBWYTs9ROJSTN3E8kGMJTGbsiyC5Rwd8_f1_Yrl0zY22uM5JMbbHCepQfkCi_o9Bd7YUOpsin7UAeMIeSNiwx4Ty27KHwax6mIMmZQ77jvQZnWCX2dcf";
+    //String access_token = "BQCS3h01ARa1T1JiE3NZcUALbQ8tzyoBSqEPsvGVT3EtN7URRceI_qajahQVLGrlybyN6FmfTIg_FFCkbZZxGRatiPHb28GYpDrdV9wXyYYxo2TKbe2yAWbN_vTM6VgCkIYnMOdU69tgP-VBLsj-nx1PakD_Hrqdi216lFqyvfpGMgTW99dY6TAIYVqoYbcc9oqDDLVswWkbSKzR32qPvC2Hydk5m6DfajLtj_hAsjAY3tKqN0ypaBcCEQ7ec_u5bYj38lATXUwMHHur";
 
 
     @BeforeClass
@@ -30,7 +31,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder()
                 .setBaseUri("https://api.spotify.com/")
                 .setBasePath("v1")
-                .addHeader("Authorization", "Bearer " + access_token)
+                .addHeader("Authorization", "Bearer " + TokenManager.getToken())
 
                 .log(LogDetail.ALL);
 
@@ -59,7 +60,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
                 .contentType(ContentType.JSON)
                 .body(req_spotifyPlayList)
                 .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
                 .then()
                 .spec(responseSpecification)
 
@@ -80,16 +81,16 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
     public void shouldBeAbleToGetAPlaylist_pojo() {
 
         SpotifyPlayList req_spotifyPlayList = new SpotifyPlayList();
-        req_spotifyPlayList.setName("Rest Assured Spotify PL 0002");
-        req_spotifyPlayList.setDescription("Spotify playlist created by Spotify web api using Rest Assured");
-        req_spotifyPlayList.set_public(false);
+        req_spotifyPlayList.setName("Spotify PlayList POJO 1");
+        req_spotifyPlayList.setDescription("Spotify playlist created by rest assured using POJO");
+        req_spotifyPlayList.set_public(true);
 
         // De-serialization
         SpotifyPlayList res_spotifyPlayList = given()
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/playlists/3uuZAymSsRixFpmpiNUxNi")
+                .get("/playlists/6FN7OdCrAMoFrPsK2RDSbj")
                 .then()
                 .spec(responseSpecification)
 
@@ -119,7 +120,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
                 .contentType(ContentType.JSON)
                 .body(req_spotifyPlayList)
                 .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
                 .then()
                 .spec(responseSpecification)
 
@@ -153,7 +154,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
                 .contentType(ContentType.JSON)
                 .body(req_spotifyPlayList)
                 .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
                 .then()
                 .spec(responseSpecification)
 
@@ -184,7 +185,7 @@ public class SpotifyPlayListAPI_TestCases_Using_POJO {
                 .body(req_spotifyPlayList)
                 .log().all()
                 .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
                 .then()
                 .log().all()
                 .assertThat()

@@ -1,5 +1,6 @@
 package com.restAssured.framework.spotify.playList_testcases;
 
+import com.restAssured.framework.spotify.api.TokenManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -19,7 +20,7 @@ public class SpotifyPlayListAPI_TestCases {
     RequestSpecification requestSpecification;
     ResponseSpecification responseSpecification;
 
-    String access_token = "BQCkQjPaZfFfpvgFaOratkSfm8ebJUi0A-WB-gDQIHXwE0WB7F3oSY4KVKRS1GEWhyF5H0WBGjTJz-i6wgcWiqzMF4hVNKTcg-dW4iyTDPuHHxeOZIXamjuPHmooeTLx9c94WfRqUkn10XGh_HZd-tumcdFCSCWAVmTuguhYxUp7E3lvDIM6I3cRlqXI29EIFwNuuvxXrwo-e3heHtm9gMIbWLGCO4vnWvgDia89TCf9jZwPhUXV-wYVnih2IKT2CcZHkqP_q_VwxnPp";
+    //String access_token = "BQCS3h01ARa1T1JiE3NZcUALbQ8tzyoBSqEPsvGVT3EtN7URRceI_qajahQVLGrlybyN6FmfTIg_FFCkbZZxGRatiPHb28GYpDrdV9wXyYYxo2TKbe2yAWbN_vTM6VgCkIYnMOdU69tgP-VBLsj-nx1PakD_Hrqdi216lFqyvfpGMgTW99dY6TAIYVqoYbcc9oqDDLVswWkbSKzR32qPvC2Hydk5m6DfajLtj_hAsjAY3tKqN0ypaBcCEQ7ec_u5bYj38lATXUwMHHur";
 
 
 
@@ -28,9 +29,9 @@ public class SpotifyPlayListAPI_TestCases {
     public void setUpSpecification(){
 
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder()
-                .setBaseUri("https://api.spotify.com/")
+                    .setBaseUri("https://api.spotify.com/")
                 .setBasePath("v1")
-                .addHeader("Authorization","Bearer " + access_token)
+                .addHeader("Authorization","Bearer " + TokenManager.getToken())
 
                 .log(LogDetail.ALL);
 
@@ -64,7 +65,7 @@ public class SpotifyPlayListAPI_TestCases {
                 .contentType(ContentType.JSON)
                 .body(createPlaylistPayload)
         .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
         .then()
                 .spec(responseSpecification)
 
@@ -85,7 +86,7 @@ public class SpotifyPlayListAPI_TestCases {
                 .spec(requestSpecification)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/playlists/3uuZAymSsRixFpmpiNUxNi")
+                .get("/playlists/223SMF4W5ofUDiPlx62VWv")
                 .then()
                 .spec(responseSpecification)
 
@@ -94,7 +95,7 @@ public class SpotifyPlayListAPI_TestCases {
                 .contentType(ContentType.JSON)
                 .body("name",equalTo("Rest Assured Spotify PL 0002"),
                         "description",equalTo("Spotify playlist created by Spotify web api using Rest Assured"),
-                        "public",equalTo(false));
+                        "public",equalTo(true));
 
     }
 
@@ -119,7 +120,7 @@ public class SpotifyPlayListAPI_TestCases {
                 .contentType(ContentType.JSON)
                 .body(updatePlaylistPayload)
                 .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
                 .then()
                 .spec(responseSpecification)
 
@@ -155,7 +156,7 @@ public class SpotifyPlayListAPI_TestCases {
                 .contentType(ContentType.JSON)
                 .body(createPlaylistPayload)
                 .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
                 .then()
                 .spec(responseSpecification)
 
@@ -184,7 +185,7 @@ public class SpotifyPlayListAPI_TestCases {
                 .body(playlistPayload)
                 .log().all()
         .when()
-                .post("/users/312p2bxukvqmvk2zkzjwiigvjcgi/playlists")
+                .post("/users/31xpojaotgmaxzoqgcdvx3g5uuou/playlists")
         .then()
                 .log().all()
                 .assertThat()

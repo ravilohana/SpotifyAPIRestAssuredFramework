@@ -19,7 +19,7 @@ public class SpotifyCommonAPI_HTTP_Methods {
     public static Response post(String path,String token, Object spotify_request_payload) {
         return given()
 
-         //       .header("Authorization", "Bearer " + token)
+                .header("Authorization", "Bearer " + token)
                 .spec(getRequestSpecs())
 
                 .contentType(ContentType.JSON)
@@ -46,7 +46,7 @@ public class SpotifyCommonAPI_HTTP_Methods {
     }
     public static Response get(String path,String token){
         return given()
-        //        .header("Authorization", "Bearer " + token)
+                .header("Authorization", "Bearer " + token)
 
                 .spec(getRequestSpecs())
                 .contentType(ContentType.JSON)
@@ -61,7 +61,7 @@ public class SpotifyCommonAPI_HTTP_Methods {
 
     public static Response update(String path,String token, Object spotify_request_payload){
         return given()
-       //         .header("Authorization", "Bearer " + token)
+               .header("Authorization", "Bearer " + token)
 
                 .spec(getRequestSpecs())
                 .contentType(ContentType.JSON)
